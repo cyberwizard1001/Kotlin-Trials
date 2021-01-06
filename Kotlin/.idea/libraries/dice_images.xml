@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="dice_images">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Codelabs/Dice/dice_images.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

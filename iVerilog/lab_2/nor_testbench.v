@@ -1,11 +1,14 @@
-module orgate_test;
+module norgate_test;
 wire t_y;
 reg t_a,t_b;
 
-orgate test_gate(t_a,t_b,t_y);
+
+norgate test_gate(t_a,t_b,t_y);
 
 initial
 begin
+
+    t_y = 0;
 $monitor(t_a,t_b,t_y);
 t_a = 1'b0;
 t_b = 1'b0;

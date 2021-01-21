@@ -1,8 +1,8 @@
-module orgate_test;
+module nandgate_test;
 wire t_y;
 reg t_a,t_b;
 
-orgate test_gate(t_a,t_b,t_y);
+nandgate test_gate(t_a,t_b,t_y);
 
 initial
 begin

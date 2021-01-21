@@ -1,8 +1,8 @@
-module orgate_test;
+module xnorgate_test;
 wire t_y;
 reg t_a,t_b;
 
-orgate test_gate(t_a,t_b,t_y);
+xnorgate test_gate(t_a,t_b,t_y);
 
 initial
 begin

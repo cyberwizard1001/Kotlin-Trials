@@ -1,14 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jan 22 22:54:08 2021
-
-@author: nirmalk
-"""
-
 class SLList:
+
     class node:
-        def __init__(self, data):
+        def __init__(self,data):
             self.element = data
             self.next = None
 
@@ -16,60 +9,71 @@ class SLList:
         self.head = self.node(None)
         self.sz = 0
 
-    def insertLast(self, data):
-        # @start-editable@
-        
-        newNode = self.node(data)
-        temp = self.head
-        while temp.next != None:
-            temp = temp.next
-        temp.next = newNode
-        self.sz += 1
 
-        # @end-editable@
+    def insertLast(self,data):
+        #@start-editable@
+
+
+        newNode = self.node(data)
+        if self.sz == 0:
+            self.head = newNode
+            newNode.next = None
+            self.sz += 1
+        else:
+            temp = self.head
+            while temp.next != None:
+                temp = temp.next
+            temp.next = newNode
+            newNode.next = None
+            self.sz += 1
+
+        #@end-editable@
         return
 
-    def insertFirst(self, data):
-        # @start-editable@
+    def insertFirst(self,data):
+        #@start-editable@
+
 
         newnode = self.node(data)
-        if self.head == None:
+        if self.sz == 0:
             self.head = newnode
+            self.head.next = None
             self.sz += 1
         else:
             newnode.next = self.head
             self.head = newnode
             self.sz += 1
 
-        # @end-editable@
+        #@end-editable@
         return
 
     def deleteFirst(self):
 
-        # @start-editable@
+        #@start-editable@
+
 
         if self.size() == 0:
-            return "ListEmptyException"
+            print("ListEmptyException")
         elif self.size() == 1:
-            self.head.element = None
+            self.head = None
             self.sz -= 1
         else:
-            temp = self.node()
             temp = self.head
-            head = self.head.next
+            self.head = self.head.next
             temp.next = None
             self.sz -= 1
 
-        # @end-editable@
+        #@end-editable@
         return
 
     def deleteLast(self):
-        # @start-editable@
+        #@start-editable@
+
 
         if self.size() == 0:
-            return "ListEmptyException"
+            print("ListEmptyException")
         elif self.size() == 1:
-            self.head.element = None
+            self.head = None
             self.sz -= 1
         else:
             curnode = self.head
@@ -79,82 +83,82 @@ class SLList:
             curnode.next = None
             self.sz -= 1
 
-        # @end-editable@
+        #@end-editable@
         return
+
 
     def printList(self):
         if (self.isEmpty()):
-            print("List Empty")
+            print ("List Empty")
         else:
             tnode = self.head
-            while tnode != None:
-                print(tnode.element, end="->")
+            while tnode!= None:
+                print(tnode.element,end="->")
                 tnode = tnode.next
             print("null")
         return
 
     def findNode(self, val):
-        # @start-editable@
+        #@start-editable@
 
-        temp = self.head
-        while temp.next != None:
-            if temp.element == val:
-                return temp.element
-            temp = temp.next
+        if self.size() == 0:
+            print("ListEmptyException")
+        else:
+            temp = self.head
+            while (temp.next != None):
+                if temp.element == val:
+                    return temp.element
+                temp = temp.next
 
-    # @end-editable@
+        #@end-editable@
         return None
 
-
     def getHead(self):
-        # @start-editable@
+        #@start-editable@
 
         return self.head.element
 
-    # @end-editable@
-
+        #@end-editable@
 
     def isEmpty(self):
-    # @start-editable@
+        #@start-editable@
 
         return self.sz == 0
 
-    # @end-editable@
 
+        #@end-editable@
 
     def size(self):
-    # @start-editable@
+        #@start-editable@
 
         return self.sz
 
-    # @end-editable@
-
+        #@end-editable@
 
     def getLastNode(self):
-    # @start-editable@
+        #@start-editable@
 
         temp = self.head
         while temp.next != None:
             temp = temp.next
         return temp.element
 
-    # @end-editable@
-
+        #@end-editable@
 
     def delKth(self, k):
-    # @start-editable@
+
+        #@start-editable@
 
 
         curnode = self.head
         if self.head == None:
-            return 
+            print("ListEmptyException")
         if k == 0:
             self.head = curnode.next
             curnode = None
             return
         else:
-        # finding the previos node here
-            for i in range(k - 1):
+            for i in range(1,k-1):
                 curnode = curnode.next
             if curnode.next == None:
                 return
@@ -162,65 +166,66 @@ class SLList:
             curnode.next = None
             curnode.next = variable
 
-    # @end-editable@
 
+
+        #@end-editable@
 
     def swapAdj(self):
-    # @start-editable@
+
+        #@start-editable@
 
         curnode = self.head
         if self.head == None:
-            return
+            print("ListEmptyException")
         while curnode.next != None:
             if curnode.element == curnode.next.element:
                 curnode = curnode.next.next
             else:
-                curnode.element, curnode.next.element = curnode.next.element, curnode.element
+                curnode.element,curnode.next.element = curnode.next.element,curnode.element
                 curnode = curnode.next.next
 
-    # @end-editable@
 
+        #@end-editable@
 
 def testSLL():
     sll = SLList()
-    inputs = int(input())
-    while inputs > 0:
-        command = input()
-        operation = command.split()
-        if (operation[0] == "S"):
+    inputs=int(input())
+    while inputs>0:
+        command=input()
+        operation=command.split()
+        if(operation[0]=="S"):
             print(sll.size())
-        elif (operation[0] == "I"):
+        elif(operation[0]=="I"):
             print(sll.isEmpty())
-        elif (operation[0] == "AF"):
+        elif(operation[0]=="AF"):
             sll.insertFirst(int(operation[1]))
             sll.printList()
-        elif (operation[0] == "AL"):
+        elif(operation[0]=="AL"):
             sll.insertLast(int(operation[1]))
             sll.printList()
-        elif (operation[0] == "RF"):
+        elif(operation[0]=="RF"):
             sll.deleteFirst()
             sll.printList()
-        elif (operation[0] == "RL"):
+        elif(operation[0]=="RL"):
             sll.deleteLast()
             sll.printList()
-        elif (operation[0] == "F"):
+        elif(operation[0]=="F"):
             print(sll.getHead())
-        elif (operation[0] == 'L'):
+        elif(operation[0]=='L'):
             print(sll.getLastNode())
-        elif (operation[0] == 'FIND'):
+        elif(operation[0]=='FIND'):
             print(sll.findNode(int(operation[1])))
-        elif (operation[0] == 'DK'):
+        elif(operation[0]=='DK'):
             sll.delKth(int(operation[1]))
             sll.printList()
-        elif (operation[0] == 'SA'):
+        elif(operation[0]=='SA'):
             sll.swapAdj()
             sll.printList()
-        inputs -= 1
+        inputs-=1
 
 
 def main():
     testSLL()
-
 
 if __name__ == '__main__':
     main()

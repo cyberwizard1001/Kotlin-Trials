@@ -13,13 +13,21 @@ class SLList:
     def insertLast(self,data):
         #@start-editable@
 
-        curnode = self.node()
-        curnode = self.head
-        while curnode.next!=None:
-            curnode = curnode.next
         
-        curnode.next = data
-        self.sz+=1
+        nnode = self.node(data)
+        
+        if self.size()==0:
+            self.head = nnode
+            nnode.next = None
+            self.sz+=1
+            
+        else:    
+            curnode = self.head
+            while curnode.next!=None:
+                curnode = curnode.next
+        
+            curnode.next = nnode
+            self.sz+=1
         
         #@end-editable@
         return
@@ -27,9 +35,17 @@ class SLList:
     def insertFirst(self,data):
         #@start-editable@
 
-        data.next = self.head
-        self.head = data
-        self.s+=1
+
+        nnode = self.node(data)
+        
+        if self.size()==0:
+            self.head = nnode
+            self.sz+=1
+        
+        else:
+            nnode.next = self.head
+            self.head = nnode
+            self.sz+=1
         
         #@end-editable@
         return
@@ -39,16 +55,15 @@ class SLList:
         #@start-editable@
 
         if self.size()==0:
-            return "List empty"
+            return "ListEmptyException"
             
         elif self.size() == 1:
             self.head.element = None
             self.sz-=1
             
         else:
-            temp = self.node()
             temp = self.head
-            head = self.head.next
+            self.head = self.head.next
             temp.next = None
             self.sz-=1
         
@@ -59,18 +74,19 @@ class SLList:
         #@start-editable@
 
         if self.size() == 0:
-            return "List empty"
+            return "ListEmptyException"
             
         elif self.size()==1:
-            self.head.element = None
+            self.head = None
             self.sz=-1
             
         else:
-            curnode = self.node()
             curnode = self.head
             while curnode.next.next!=None:
                 curnode = curnode.next
-            curnode.next = None;
+                
+            curnode.next = None
+            self.sz-=1
         
         #@end-editable@
         return
@@ -90,12 +106,13 @@ class SLList:
     def findNode(self, val):
         #@start-editable@
 
-        curnode = self.node()
+        curnode = self.head
 		
-        while(curnode.element!=val):
+        while curnode.next != None:
+            if curnode.element == val:
+                return curnode.element
+                
             curnode = curnode.next
-
-        return curnode.element
         
         #@end-editable@
         return None
@@ -125,7 +142,6 @@ class SLList:
     def getLastNode(self):
         #@start-editable@
 
-        curnode = self.node()
         curnode = self.head
         while curnode.next!=None:
             curnode = curnode.next
@@ -138,16 +154,25 @@ class SLList:
           
         #@start-editable@
 
-        curnode = self.node()
-        curnode = self.head
-        count = 0
+        if self.head == None:
+            return
+        
+        if k == 0:
+            curnode = self.head
+            self.head = curnode.next
+            curnode = None
+            return
+        
+        else:
+            curnode = self.head
+            count = 1
 
-        while count<k-1:
-            curnode = curnode.next
-            count+=1
+            while count<k-1:
+                curnode = curnode.next
+                count+=1
             
-        curnode.next = curnode.next.next
-        self.sz-=1
+            curnode.next = curnode.next.next
+            self.sz-=1
         
         #@end-editable@
      

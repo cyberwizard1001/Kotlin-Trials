@@ -13,21 +13,21 @@ class SLList:
     def insertLast(self,data):
         #@start-editable@
 
-        
         nnode = self.node(data)
-        
-        if self.size()==0:
+
+        if self.isEmpty():
             self.head = nnode
-            nnode.next = None
-            self.sz+=1
             
-        else:    
-            curnode = self.head
-            while curnode.next!=None:
-                curnode = curnode.next
-        
-            curnode.next = nnode
+        else:
+            tnode = self.head
+
+            while tnode.next!=None:
+                tnode = tnode.next
+            
+            tnode.next = nnode
             self.sz+=1
+        
+        
         
         #@end-editable@
         return
@@ -35,13 +35,11 @@ class SLList:
     def insertFirst(self,data):
         #@start-editable@
 
-
         nnode = self.node(data)
-        
-        if self.size()==0:
+
+        if self.isEmpty():
             self.head = nnode
-            self.sz+=1
-        
+
         else:
             nnode.next = self.head
             self.head = nnode
@@ -54,9 +52,9 @@ class SLList:
 
         #@start-editable@
 
-        if self.size()==0:
+        if self.size() ==0:
             print("ListEmptyException")
-            
+
         elif self.size() == 1:
             self.head.element = None
             self.sz-=1
@@ -66,6 +64,8 @@ class SLList:
             self.head = self.head.next
             temp.next = None
             self.sz-=1
+
+        
         
         #@end-editable@
         return
@@ -78,17 +78,16 @@ class SLList:
             
         elif self.size()==1:
             self.head.element = None
-            self.sz-=1
+            self.sz=-1
             
         else:
             curnode = self.head
             while curnode.next.next!=None:
                 curnode = curnode.next
                 
-            temp = curnode.next
             curnode.next = None
-            del temp
             self.sz-=1
+        
         
         #@end-editable@
         return
@@ -108,7 +107,6 @@ class SLList:
     def findNode(self, val):
         #@start-editable@
 
-        
         if self.size()==0:
             print("ListEmptyException") 
             
@@ -120,14 +118,14 @@ class SLList:
                     return curnode.element
                 
                 curnode = curnode.next
-        return 
+        
         #@end-editable@
         return None
         
     def getHead(self):
         #@start-editable@
 
-        return self.head.element
+         return self.head.element
         
         #@end-editable@
      
@@ -135,7 +133,6 @@ class SLList:
         #@start-editable@
 
         return(self.sz==0)
-        
         
         #@end-editable@
 
@@ -153,7 +150,7 @@ class SLList:
         while curnode.next!=None:
             curnode = curnode.next
             
-        return curnode.element
+        return curnode
         
         #@end-editable@
 		  
@@ -161,7 +158,7 @@ class SLList:
           
         #@start-editable@
 
-        if self.head == None:
+        if self.size()==0:
             print("ListEmptyException") 
         
         if k == 0:
@@ -173,7 +170,7 @@ class SLList:
         
         else:
             curnode = self.head
-            count = 1
+            count = 0
 
             while count<k-1:
                 curnode = curnode.next
@@ -190,7 +187,7 @@ class SLList:
         #@start-editable@
 
         
-        return
+        
         
         #@end-editable@
      

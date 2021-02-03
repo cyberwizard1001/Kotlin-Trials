@@ -6,6 +6,6 @@
     <string name="ok">OK (15%)</string>
     <string name="round_up_tip_text">Round up tip?</string>
     <string name="calculate_text">Calculate</string>
-    <string name="tip_amount">Tip Amount</string>
+    <string name="tip_amount">Tip Amount: %s</string>
     <string name="good">Good (18%)</string>
 </resources>

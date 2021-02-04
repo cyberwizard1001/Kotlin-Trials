@@ -26,14 +26,16 @@ class DLList:
         if(self.size()==0):
             self.tail=self.head
             self.head.element = u
+            self.sz+=1
 
         #set existing tail's next to nnode, 
         #set nnode as tail
-        nnode.next=None
-        self.tail.next = nnode
-        nnode.prev = self.tail
-        self.tail=nnode
-        self.sz+=1
+        else:
+            nnode.next=None
+            self.tail.next = nnode
+            nnode.prev = self.tail
+            self.tail=nnode
+            self.sz+=1
 
         return    
 
@@ -48,7 +50,6 @@ class DLList:
         #making head's value as u 
         if(self.isEmpty()):
             self.head.element=u
-            print(self.sz)
 
         else:
             nnode.next = self.head
@@ -121,11 +122,14 @@ class DLList:
             tnode=tnode.prev
 
             #procedure to insert node after tnode (check)
+            nnode.next=tnode.next
             tnode.next=nnode
             nnode.prev=tnode
-            nnode.next=tnode.next
             tnode.next.prev=nnode
             self.sz+=1
+
+        else:
+            print("Node to insert before not found")
 
         return
 
@@ -276,7 +280,7 @@ class DLList:
             else: flag=True
 
         #if element exists, return it
-        if(flag):
+        if(flag is True):
             return tnode
 
         #else, return nothing

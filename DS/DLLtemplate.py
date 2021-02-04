@@ -14,18 +14,18 @@ class DLList:
     def getHead(self):
         #@start-editable@
 
-        return self.head.element
+        return self.head
 			
 	    #@end-editable@
-        return
+        
     
-        def getLastNode(self):
+    def getLastNode(self):
         #@start-editable@
 
-            return self.tail.element
-            
-        #@end-editable@
-        return
+        return self.tail	
+			
+	    #@end-editable@
+        
      
     def insertLast(self,u):
         #@start-editable@
@@ -35,23 +35,23 @@ class DLList:
 
         #if list is empty, insert said node at head. It'll 
         #automatically become tail in the end
-        
         if(self.size()==0):
             self.tail=self.head
             self.head.element = u
+            self.sz+=1
 
         #set existing tail's next to nnode, 
         #set nnode as tail
-        
-        nnode.next=None
-        self.tail.next = nnode
-        nnode.prev = self.tail
-        self.tail=nnode
-        self.sz+=1
-
+        else:
+            nnode.next=None
+            self.tail.next = nnode
+            nnode.prev = self.tail
+            self.tail=nnode
+            self.sz+=1
+	
 			
 	    #@end-editable@
-        return
+        
 
     def insertFirst(self,u):
         #@start-editable@
@@ -63,17 +63,17 @@ class DLList:
         #making head's value as u 
         if(self.isEmpty()):
             self.head.element=u
-            print(self.sz)
 
         else:
             nnode.next = self.head
             self.head.prev = nnode
             self.head = nnode
         
-        self.sz+=1	
+        self.sz+=1
+	
 			
 	    #@end-editable@
-        return
+        
         
          
     #insert a node with value u after the node containing value v
@@ -81,21 +81,36 @@ class DLList:
     def insertAfter(self,u,v):
         #@start-editable@
 
+		#create a new node
         nnode = self.node(u)
 
-        tnode = self.findNode(v)
+        #traverse to find node with element v
+        tnode = self.head
+        flag = False
 
-        if(tnode!=None):
+        while(tnode.next!=None and not flag):
+
+            if tnode.element!=v:
+                tnode=tnode.next
+
+            else: 
+                flag = True
+
+        #if such node exists, insert node after that
+        if(flag):
+            #procedure to insert node after tnode (check)
+            nnode.next=tnode.next
             tnode.next=nnode
             nnode.prev=tnode
-            nnode.next=tnode.next
             tnode.next.prev=nnode
             self.sz+=1
-            
+
+        #else print error
         else:
             print("Node to insert after not found")
-            
-        #@end-editable@
+	
+			
+	    #@end-editable@
         return
 
 
@@ -104,26 +119,37 @@ class DLList:
     def insertBefore(self,u,v):
         #@start-editable@
 
+		#create a new node
         nnode = self.node(u)
 
-        tnode = self.findNode(v)
+        #traverse to find node with element v
+        tnode = self.head
+        flag = False
 
-        if(tnode!=None):
+        while(tnode.next!=None and not flag):
+
+            if tnode.element!=v:
+                tnode=tnode.next
+
+            else: flag = True
+
+        #if such node exists, insert node before that
+        if(flag):
             #set tnode to point to previous node
             tnode=tnode.prev
 
             #procedure to insert node after tnode (check)
+            nnode.next=tnode.next
             tnode.next=nnode
             nnode.prev=tnode
-            nnode.next=tnode.next
             tnode.next.prev=nnode
             self.sz+=1
             
         else:
             print("Node to insert before not found")
-            
-        #@end-editable@
-        return
+			
+	    #@end-editable@
+        
 
     def deleteFirst(self):
         #@start-editable@
@@ -149,9 +175,10 @@ class DLList:
         #delete tnode thereby removing old head
         del tnode
         self.sz-=1
+	
 			
 	    #@end-editable@
-        return
+        
 
     def deleteLast(self):
         #@start-editable@
@@ -176,20 +203,30 @@ class DLList:
 
         #delete tnode, and hence old tail
         del tnode
-        self.sz-=1
-	
+        self.sz-=1	
 			
 	    #@end-editable@
-        return  
+          
 
     #delete the node after the node containting value u
     # error message: Node to delete after not found
     def deleteAfter(self,u):
         #@start-editable@
 
-        tnode = self.findNode(u)
+		#create traversal node
+        tnode = self.head
 
-        if(tnode!=None):
+        #traverse till finding element u
+        flag = False
+        while(tnode.next!=None and not flag):
+            if(tnode.element!=u):
+                tnode = tnode.next
+
+            else: flag = True
+
+        if flag:
+            #deleting tnode
+
             #setting tnode as next node (ie to be deleted node)
             tnode = tnode.next
 
@@ -203,20 +240,35 @@ class DLList:
             del tnode
             self.sz-=1
 
-        else:  
+        else: #INSERT ERROR MESSAGE 
             print("Node to delete after not found")
-            
-        #@end-editable@
-        return
+	
+			
+	    #@end-editable@
+        
 
     #delete the node before the node containting value u
     # error message: Node to delete before not found
-        def deleteBefore(self,u):
+    def deleteBefore(self,u):
         #@start-editable@
 
-            tnode = findNode(u)
+			#create traversal node 
+        tnode = self.head
 
-        if(tnode!=None):
+        #traverse 
+        flag = False
+        while(tnode.next!=None and not flag):
+            if(tnode.element!=u):
+                tnode=tnode.next
+
+            else:
+                flag=True
+
+        if flag:
+
+            if self.size()==1:
+                return
+
             #setting node to be deleted as tnode
             tnode = tnode.prev
 
@@ -233,14 +285,15 @@ class DLList:
         else: #INSERT ERROR
             print("Node to delete before not found")
 
-            
-        #@end-editable@
-        return
+			
+	    #@end-editable@
+        
 
-        def findNode(self, val):
+    def findNode(self, val):
         #@start-editable@
 
-            tnode = self.head
+		#create a node to traverse
+        tnode = self.head
 
         #traverse
         flag = False
@@ -252,30 +305,48 @@ class DLList:
             else: flag=True
 
         #if element exists, return it
-        if(flag):
+        if(flag is True):
             return tnode
-            
-        else:  
-            return
-            
-        #@end-editable@
-        return
+	
+			
+	    #@end-editable@
+        
 
-        #swap the nodes containing u and v
-        def swap(self,u,v):
+    #swap the nodes containing u and v
+    def swap(self,u,v):
         #@start-editable@
-            
-        #@end-editable@
-            return
+
+        iterate_1 = self.head
+        while iterate_1.next is not None:
+            if iterate_1.element == u:
+                break
+            iterate_1 = iterate_1.next
+        iterate_2 = self.head
+        while iterate_2.next is not None:
+            if iterate_2.element == v:
+                break
+            iterate_2 = iterate_2.next
+
+        temp = iterate_1.element
+        iterate_1.element = iterate_2.element
+        iterate_2.element = temp
+  
+			
+	    #@end-editable@
+        
  
     def isEmpty(self):
         #@start-editable@
+
+	
 			
 	    #@end-editable@
         return (self.sz==0)
 
     def size(self):
         #@start-editable@
+
+			
 			
 	    #@end-editable@
         return self.sz

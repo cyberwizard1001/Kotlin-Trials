@@ -62,14 +62,49 @@ class MyStack():
 class Parentheses():
     def __init__(self, stacksize):
         self.S = MyStack(stacksize)
+        self.size = stacksize-2
+
+    def insert_paranthesis(self,pattern):
+        for i in range(0,len(pattern)):
+            self.S.push(pattern[i])
+
 
     #@start-editable@
+    def logic(self):
+        
+        pop_str = []
+        i = 0
+        count = 0
+        j=0
+        final_list = []
+        
+        for i in range(0,self.size):
+            while(self.S.size()>0):
+                print(i)
+                pop_str.append(self.S.pop())
+                i+=1
 
-			
-			
-    #@end-editable@   
-        
-        
+                if(pop_str[i]=='(' and count>0):
+                    count+=1
+                    final_list[j][i]='('
+
+                if(pop_str[i]==')'):
+                    count-=1
+            
+                    if(count>=0):
+                        final_list[j][i]=')'
+                
+
+                if(count==0 and pop_str[i]=='('):
+                    j+=1
+                    count+=1
+                    final_list[j][i]='('
+
+                if(count<0):
+                    break
+
+            print(count,final_list)
+            return
 
 
 def teststack():
@@ -78,8 +113,9 @@ def teststack():
         pattern = input()
         #Must use the stack ADT
         #@start-editable@
-
-			
+        parentheses = Parentheses(len(pattern)+2)
+        parentheses.insert_paranthesis(pattern)
+        parentheses.logic()
 			
 	    #@end-editable@
 
@@ -90,5 +126,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    

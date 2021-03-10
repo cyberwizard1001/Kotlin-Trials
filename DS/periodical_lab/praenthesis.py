@@ -12,7 +12,8 @@ class MyStack():
     # define the push operation which  pushes the value into the stack, must throw a stack full exception
     def push(self, value):
         if (self.size() == self.max_stack_size):
-            print("StackFullException")
+            #print("StackFullException")
+            return
         else:
             self.t= self.t+1
             self.stack[self.t] = value
@@ -22,7 +23,7 @@ class MyStack():
     # returns top element of stack if not empty, else throws stack empty exception
     def pop(self):
         if (self.size() == 0):
-            print("StackEmptyException")
+            #print("StackEmptyException")
             return
         else:
             toret = self.stack[self.t]
@@ -65,7 +66,69 @@ class Parentheses():
 
     #@start-editable@
 
-			
+    def insert_parenthesis(self,pattern):
+
+        open = 0
+        
+        for i in range (0,len(pattern)):
+
+            while(open>=0):
+
+                if(open==0 and i>0):
+                    #print("if 3")
+                    self.S.push("|")
+                    
+                if(pattern[i]=="("):
+                    #print("if 1")
+                    open+=1
+                    self.S.push(pattern[i])
+                    break
+
+                if(pattern[i]==")"):
+                    open-=1
+                    self.S.push(pattern[i])
+                    break
+
+                if (open == self.S.max_stack_size): 
+                    #print("SizeExceeded")
+                    return 
+
+        final = []
+        while self.S.size()>0:
+            final.append(self.S.pop())
+
+        final.reverse()
+
+        size = len(final)
+
+        string = ""
+
+        for x in final:
+            #print(x)
+            string = string + x
+
+        string = string + "|"
+        
+        #logic call here.    
+        self.logic(string)    
+
+    def logic(self,string):
+        #print(string)
+        max = 0
+        current = 0
+        result = ""
+        for x in string:
+            if(x!="|"):
+                result = result + x
+                current+=1
+
+
+            if(x=="|"):
+                if(current>max):
+                    max=current
+                    current = 0
+        print(str(max)+" "+result)            
+        return			
 			
     #@end-editable@   
         
@@ -79,7 +142,11 @@ def teststack():
         #Must use the stack ADT
         #@start-editable@
 
-			
+        stack = Parentheses(len(pattern)+10)
+        stack.insert_parenthesis(pattern)
+        testcases-=1
+
+    return			
 			
 	    #@end-editable@
 
@@ -90,5 +157,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    

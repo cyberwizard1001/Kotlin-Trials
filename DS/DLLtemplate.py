@@ -36,8 +36,7 @@ class DLList:
         #if list is empty, insert said node at head. It'll 
         #automatically become tail in the end
         if(self.size()==0):
-            self.tail=self.head
-            self.head.element = u
+            self.tail=self.head = nnode
             self.sz+=1
 
         #set existing tail's next to nnode, 
@@ -62,7 +61,7 @@ class DLList:
         
         #making head's value as u 
         if(self.isEmpty()):
-            self.head.element=u
+            self.head = self.tail =nnode
 
         else:
             nnode.next = self.head
@@ -85,29 +84,34 @@ class DLList:
         nnode = self.node(u)
 
         #traverse to find node with element v
-        tnode = self.head
-        flag = False
+        if(not self.isEmpty()==0):
+            if(self.size()==1 and (self.head.element==v)):
+                self.insertLast(u)
 
-        while(tnode.next!=None and not flag):
+            else:
+                tnode = self.head
+                flag = False
 
-            if tnode.element!=v:
-                tnode=tnode.next
+                while(tnode.next!=None and not flag):
 
-            else: 
-                flag = True
+                    if tnode.element!=v:
+                    tnode=tnode.next
 
-        #if such node exists, insert node after that
-        if(flag):
-            #procedure to insert node after tnode (check)
-            nnode.next=tnode.next
-            tnode.next=nnode
-            nnode.prev=tnode
-            tnode.next.prev=nnode
-            self.sz+=1
+                else: 
+                    flag = True
+
+                #if such node exists, insert node after that
+                if(flag):
+                #procedure to insert node after tnode (check)
+                    nnode.next=tnode.next
+                    tnode.next=nnode
+                    nnode.prev=tnode
+                    tnode.next.prev=nnode
+                self.sz+=1
 
         #else print error
-        else:
-            print("Node to insert after not found")
+            else:
+                print("Node to insert after not found")
 	
 			
 	    #@end-editable@
@@ -119,35 +123,42 @@ class DLList:
     def insertBefore(self,u,v):
         #@start-editable@
 
-		#create a new node
-        nnode = self.node(u)
+            #create a new node
+        if(self.listEmpty()):
+            print("Empty list")
 
-        #traverse to find node with element v
-        tnode = self.head
-        flag = False
 
-        while(tnode.next!=None and not flag):
+        elif self.size()==1 and (self.head.element==v):    
+            self.insertLast()
 
-            if tnode.element!=v:
-                tnode=tnode.next
+        else:
+            #traverse to find node with element v
+            nnode = self.node(u)
+            tnode = self.head   
+            flag = False
 
-            else: flag = True
+            while(tnode.next!=None and not flag):
+
+                if tnode.element!=v:
+                    tnode=tnode.next
+
+                else: flag = True
 
         #if such node exists, insert node before that
-        if(flag):
+            if(flag):
             #set tnode to point to previous node
-            tnode=tnode.prev
+                tnode=tnode.prev
 
             #procedure to insert node after tnode (check)
-            nnode.next=tnode.next
-            tnode.next=nnode
-            nnode.prev=tnode
-            tnode.next.prev=nnode
-            self.sz+=1
+                nnode.next=tnode.next
+                tnode.next=nnode
+                nnode.prev=tnode
+                tnode.next.prev=nnode
+                self.sz+=1
             
-        else:
-            print("Node to insert before not found")
-			
+            else:
+                print("Node to insert before not found")
+    
 	    #@end-editable@
         
 

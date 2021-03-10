@@ -21,4 +21,7 @@ class BinaryTree:
         if curnode.rightchild!=None:
             children.append(curnode.rightchild)
         return children
+
+        def isExternal(self,node):
+            return
         

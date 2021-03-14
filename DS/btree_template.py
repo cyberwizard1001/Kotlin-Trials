@@ -1,7 +1,6 @@
 #@start-editable@
 
-import math
-from collections import deque			
+			
 			
 #@end-editable@
 
@@ -42,61 +41,37 @@ class BinaryTree:
 
     def inorderTraverse(self, v):
         #@start-editable@
+        return
 
-    	if v!= None:
-                self.inorderTraverse(v.leftchild)
-                print(v.element,end=",")
-                self.inorderTraverse(v.rightchild)			
-			
 	    #@end-editable@
         
 
     def preorderTraverse(self, v):
         #@start-editable@
-
-        if v != None:
-            print(v.element,end=",")
-            self.preorderTraverse(v.leftchild)
-            self.preorderTraverse(v.rightchild)			
-			
+        return
 	    #@end-editable@
        
 
     def postorderTraverse(self, v):
-        #@start-editable@
+    #@start-editable@
 
-        if v != None:
-            self.postorderTraverse(v.leftchild)
-            self.postorderTraverse(v.rightchild)
-            print(v.element,end=",")			
-			
-	    #@end-editable@
+        return
+            
+    #@end-editable@
         
 
     def levelorderTraverse(self, v):
         #@start-editable@
 
-        bqueue = deque()
-        bqueue.append(v)
-        while len(bqueue) > 0:
-            pointer = bqueue.popleft()
-            print(pointer.element,end=",")
-            if pointer.leftchild != None:
-                bqueue.append(pointer.leftchild)
-            if pointer.rightchild != None: 
-                bqueue.append(pointer.rightchild)			
-			
-	    #@end-editable@
+        return
+            
+        #@end-editable@
        
 
     def findDepth(self, v):
         #@start-editable@
 
-        depth = 0
-        while v.parent != None:
-            v = v.parent
-            depth+=1
-        return depth			
+			
 			
 	    #@end-editable@
     	
@@ -104,9 +79,7 @@ class BinaryTree:
     def findHeight(self, v):
         #@start-editable@
 
-        if v is None:
-            return -1
-        return max(self.findHeight(v.leftchild)+1,self.findHeight(v.rightchild)+1)			
+			
 			
 	    #@end-editable@
     	
@@ -115,7 +88,7 @@ class BinaryTree:
     def delLeaves(self, v):
         #@start-editable@
 
-        return			
+			
 			
 	    #@end-editable@
         
@@ -123,13 +96,7 @@ class BinaryTree:
     def isProper(self, v):
         #@start-editable@
 
-        if v is None:
-            return True
-        if v.leftchild == None and v.rightchild == None:
-            return True
-
-        if v.leftchild != None and v.rightchild != None:
-            return self.isProper(v.rightchild) and self.isProper(v.leftchild)			
+			
 			
 	    #@end-editable@
         
@@ -137,17 +104,7 @@ class BinaryTree:
     def mirror(self, v):
         #@start-editable@
 
-        if v is None:
-            return
-
-        #recursive calls
-        self.mirror(v.leftchild)
-        self.mirror(v.rightchild)
-
-        #swapping nodes
-        temp = v.leftchild
-        v.leftchild = v.rightchild
-        v.rightchild = temp			
+			
 			
 	    #@end-editable@
         
@@ -194,7 +151,7 @@ class BinaryTree:
     def root2leafsum(self, k):
         #@start-editable@
 
-        return			
+			
 			
 	    #@end-editable@
         
@@ -203,7 +160,7 @@ class BinaryTree:
     def leastleaf(self):
         #@start-editable@
 
-        return			
+			
 			
 	    #@end-editable@
         

@@ -1,3 +1,5 @@
+from collections import deque
+
 class Node(object):
     def __init__(self,val):
         self.value = val
@@ -30,6 +32,18 @@ class BinaryTree(object):
             self.PostOrderTraversal(self,v.rightchild)
             print(v.value,end=" ")
 
+        return
+
+    def levelorderTraverse(self, v):
+        q1 = deque()
+        q1.append(v)
+        while (len(q1)>0):
+        	temp=q1.popleft()
+        	print(temp.element,end=",")
+        	if temp.leftchild!=None:
+        		q1.append(temp.leftchild)
+        	if temp.rightchild!=None:
+        		q1.append(temp.rightchild)
         return
 
     def PrintTree(self,nlist):

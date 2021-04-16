@@ -76,15 +76,40 @@ class BinaryTree:
 
 
     def buildTree(self, expr):
-        #@start-editable@
+        #@start-editable
+
+        expr = expr.replace(" ","")
+        i = 0
+        flag = False
+
+        while(i<len(expr) and flag==False):
+            char = expr[i]
+
+            if(char==")"):
+                flag = True
+
+            i+=1 
+
+        i = i-1
+        flag = False
+
+        while(i>-1 and flag==False):
+            char = expr[i]
+
+            if(char=="("):
+                flag = True
+
+        
+
+
 
         nodelist = []
         nodelist.append(None)
         for i in range(len(expr)):
             if (i != 0):
-                if (expr[i] != -1) and (expr[i]!=","):
+                if (str[i] != -1) and (str[i]!=","):
                     tempnode = self.node()
-                    tempnode.element = expr[i]
+                    tempnode.element = str[i]
                     if i != 1:
                         tempnode.parent = nodelist[i // 2]
                         if (i % 2 == 0):
@@ -92,11 +117,15 @@ class BinaryTree:
                         else:
                             nodelist[i // 2].rightchild = tempnode
                     nodelist.append(tempnode)
-                elif expr[i]==-1:
+                elif str[i]==-1:
                     nodelist.append(None)
         
         self.root = nodelist[1]
         self.sz=len(nodelist)	
+			
+        #@end-editable@
+        return nodelist
+			
 			
         #@end-editable@
         return nodelist
@@ -106,17 +135,14 @@ class BinaryTree:
     def equivalent(self, treevec1, root1, treevec2, root2):
         #@start-editable@
 
-        
+
 
         #@end-editable@
         
 
     def printTree(self, nlist):
         for i in range(len(nlist)):
-            if (nlist[i] != None):
-                print(nlist[i].element,end=" ")
-            else:
-                print(-1)
+            print(nlist[i].element,end=" ")
 
 
     def isEmpty(self):
@@ -140,4 +166,5 @@ def main():
         print(tree1.equivalent(exptree1, tree1.root, exptree2, tree2.root))
         inputs -= 1
  
-main()
+if __name__ == '__main__':
+    main()

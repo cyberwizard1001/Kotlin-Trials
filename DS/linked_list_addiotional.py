@@ -1,4 +1,4 @@
-del kth_node(self,k):
+def kth_node(self,k):
 #delete every kth node
 	node = self.head
 	count = 0
@@ -47,5 +47,3 @@ def del_altk(self,k):
 			node = temp.next
 
 		count+=1
-	
-			

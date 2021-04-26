@@ -24,12 +24,10 @@ sem_t sem_hydro;
 void *Hydrogen(void* param)
 {
     pthread_mutex_lock(&lock);
-    n_hydro+=2;
 
     //producing a water molecule 
     while(n_w_hydro==0)
     {
-        printf("%d\n",n_w_hydro);
         if(n_hydro>=2 && n_oxy>=1)
         {
             n_hydro-=2; n_w_hydro+=2;
@@ -56,7 +54,6 @@ void *Oxygen(void* param)
     //producing a water molecule 
     while(n_w_oxy==0)
     {   
-        printf("%d\n",n_w_oxy);
         if(n_hydro>=2 && n_oxy>=1)
         {
             n_hydro-=2; n_w_hydro+=2;
@@ -79,12 +76,12 @@ void *Oxygen(void* param)
 
 int main()
 {
-    n_oxy = rand();
-    n_hydro = rand();
+    n_oxy = 2;
+    n_hydro = 4;
 
-    sem_init(&sem_oxy,0,0);  //sem,pshared,value 
-    sem_init(&sem_hydro,0,0);
-    for(int i=0;i<100;i++)
+    sem_init(&sem_oxy,0,1);  //sem,pshared,value 
+    sem_init(&sem_hydro,0,1);
+    for(int i=0;i<100000;i++)
     {
         if(i%3!=0)
         {
